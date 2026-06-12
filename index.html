@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Economics Essay Writing Coach</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}
+header{background:linear-gradient(135deg,#111827,#1e3a8a);color:white;padding:22px;text-align:center}
+header h1{margin:0;font-size:26px}
+header p{margin:6px 0 0;font-size:14px}
+.container{max-width:1400px;margin:auto;padding:16px}
+.card{background:white;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+h2{margin:0 0 12px;font-size:18px}
+label{display:block;margin-top:10px;font-weight:700;font-size:13px}
+textarea,input,select{width:100%;margin-top:5px;padding:10px;border:1px solid #cbd5e1;border-radius:12px;font-size:14px}
+textarea{min-height:130px;resize:vertical}
+button{border:0;border-radius:999px;padding:9px 14px;margin:8px 5px 0 0;font-weight:700;cursor:pointer;background:#2563eb;color:white}
+button.gray{background:#475569}
+button.green{background:#16a34a}
+button.red{background:#dc2626}
+button.purple{background:#7c3aed}
+.output{white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:14px;min-height:130px;font-size:14px;line-height:1.5}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:#e2e8f0;color:#172033}
+.tab.active{background:#1e3a8a;color:white}
+.section{display:none}
+.section.active{display:block}
+.small{font-size:13px;color:#64748b}
+ol li,ul li{margin-bottom:6px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+<header>
+<h1>Economics Essay Writing Coach</h1>
+<p>10m and 15m Essay Writing</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Workflow for Students</h2>
+<ol>
+<li>Paste the essay question.</li>
+<li>Write your own outline first.</li>
+<li>Click <b>AI Check Outline</b>.</li>
+<li>Use the feedback to write <b>Requirement 1 paragraph</b>.</li>
+<li>Click <b>AI Check Requirement 1</b>.</li>
+<li>Use the feedback to write <b>Requirement 2 paragraph</b>.</li>
+<li>Click <b>AI Check Requirement 2</b>.</li>
+<li>Click <b>Generate Full Analysis</b>.</li>
+<li>For <b>15m part b questions</b>, write your evaluation.</li>
+<li>Click <b>AI Check Evaluation</b>.</li>
+</ol>
+</div>
+
+<div class="card">
+<h2>AI Essay Coach</h2>
+<p>Your teacher has connected the AI engine. Complete each step and click the AI feedback buttons when required.</p>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('setup',this)">Step 1: Question + Outline</button>
+<button class="tab" onclick="showTab('r1',this)">Step 2: Requirement 1</button>
+<button class="tab" onclick="showTab('r2',this)">Step 3: Requirement 2</button>
+<button class="tab" onclick="showTab('full',this)">Step 4: Full Analysis</button>
+<button class="tab" onclick="showTab('eval',this)">Step 5: Evaluation</button>
+</div>
+
+<div id="setup" class="section active">
+<div class="grid">
+<div class="card">
+<h2>Step 1A: Paste Question</h2>
+<label>Question Type</label>
+<select id="essayType">
+<option value="10m">10m Part (a) Explain Question</option>
+<option value="15m">15m Part (b) Discuss Question</option>
+</select>
+<label>Essay Question</label>
+<textarea id="question" placeholder="Paste the essay question here..."></textarea>
+<label>Student Outline</label>
+<textarea id="studentOutline" placeholder="Student writes outline here first before using AI..."></textarea>
+<button class="gray" onclick="insertOutlineTemplate()">Insert Outline Template</button>
+<button onclick="checkOutline()">AI Check Outline</button>
+</div>
+<div class="card">
+<h2>Step 1B: AI Outline Feedback</h2>
+<div id="outlineFeedback" class="output"></div>
+</div>
+</div>
+</div>
+
+<div id="r1" class="section">
+<div class="grid">
+<div class="card">
+<h2>Step 2A: Requirement 1 Paragraph</h2>
+<p class="small">Use your outline feedback before writing.</p>
+<label>Requirement 1 Paragraph</label>
+<textarea id="req1Paragraph" placeholder="Write Requirement 1 paragraph using PEEL..."></textarea>
+<button class="gray" onclick="insertPEEL('req1Paragraph')">Insert PEEL Template</button>
+<button onclick="checkReq1()">AI Check Requirement 1</button>
+</div>
+<div class="card">
+<h2>Step 2B: AI Feedback for Requirement 1</h2>
+<div id="req1Feedback" class="output"></div>
+</div>
+</div>
+</div>
+
+<div id="r2" class="section">
+<div class="grid">
+<div class="card">
+<h2>Step 3A: Requirement 2 Paragraph</h2>
+<p class="small">Use the outline feedback and Requirement 1 feedback before writing.</p>
+<label>Requirement 2 Paragraph</label>
+<textarea id="req2Paragraph" placeholder="Write Requirement 2 paragraph using PEEL..."></textarea>
+<button class="gray" onclick="insertPEEL('req2Paragraph')">Insert PEEL Template</button>
+<button onclick="checkReq2()">AI Check Requirement 2</button>
+</div>
+<div class="card">
+<h2>Step 3B: AI Feedback for Requirement 2</h2>
+<div id="req2Feedback" class="output"></div>
+</div>
+</div>
+</div>
+
+<div id="full" class="section">
+<div class="card">
+<h2>Step 4: AI Full Analysis</h2>
+<p class="small">This combines the question, student outline, Requirement 1, Requirement 2, and all feedback.</p>
+<button class="purple" onclick="generateFullAnalysis()">Generate Full Analysis</button>
+<div id="fullAnalysis" class="output"></div>
+</div>
+</div>
+
+<div id="eval" class="section">
+<div class="grid">
+<div class="card">
+<h2>Step 5A: Evaluation for 15m Part (b)</h2>
+<p class="small">Only needed for 15m part (b) questions.</p>
+<label>Evaluation Framework</label>
+<select id="evalFramework">
+<option value="SSS">SSS: Stand, Support, Suggest</option>
+<option value="FEAST">FEAST: Feasibility, Effectiveness, Appropriateness, Side Effects, Time Period</option>
+</select>
+<label>Student Evaluation</label>
+<textarea id="studentEvaluation" placeholder="Write your evaluation here..."></textarea>
+<button class="gray" onclick="insertEvalTemplate()">Insert Evaluation Template</button>
+<button onclick="checkEvaluation()">AI Check Evaluation</button>
+</div>
+<div class="card">
+<h2>Step 5B: AI Evaluation Feedback</h2>
+<div id="evaluationFeedback" class="output"></div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<button class="red" onclick="clearAll()">Clear All</button>
+</div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+async function callOpenRouter(prompt){
+  const response=await fetch('/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt})
+  });
+
+  const data=await response.json();
+
+  if(!response.ok){
+    throw new Error(data.error || 'AI request failed.');
+  }
+
+  return data.reply || 'No response generated.';
+}
+
+function baseData(){
+  return {
+    essayType:document.getElementById('essayType').value,
+    question:document.getElementById('question').value,
+    outline:document.getElementById('studentOutline').value,
+    outlineFeedback:document.getElementById('outlineFeedback').textContent,
+    req1:document.getElementById('req1Paragraph').value,
+    req1Feedback:document.getElementById('req1Feedback').textContent,
+    req2:document.getElementById('req2Paragraph').value,
+    req2Feedback:document.getElementById('req2Feedback').textContent
+  };
+}
+
+function insertOutlineTemplate(){
+  document.getElementById('studentOutline').value =
+`Requirement 1:
+Point:
+Economic concept:
+Analysis chain:
+1.
+2.
+3.
+4.
+Diagram:
+Evidence / Example:
+Link back to question:
+
+Requirement 2:
+Point:
+Economic concept:
+Analysis chain:
+1.
+2.
+3.
+4.
+Diagram:
+Evidence / Example:
+Link back to question:
+
+Evaluation, if 15m:
+Stand:
+Support:
+Suggest:
+Final judgement:`;
+}
+
+function insertPEEL(id){
+  document.getElementById(id).value =
+`Point:
+State the main argument.
+
+Explain:
+Explain the economic concept and analysis chain.
+
+Evidence / Example:
+Apply to the context in the question.
+
+Link:
+Link back directly to the question.`;
+}
+
+function insertEvalTemplate(){
+  document.getElementById('studentEvaluation').value =
+`Stand:
+State your overall judgement.
+
+Support:
+Explain why this judgement is valid.
+
+Suggest / Condition:
+Explain when this judgement may change.
+
+Final judgement:
+Link directly back to the question.`;
+}
+
+async function checkOutline(){
+  const d=baseData();
+  const out=document.getElementById('outlineFeedback');
+  out.textContent='AI is checking the outline...';
+
+  const prompt=`Question type: ${d.essayType}
+
+Essay question:
+${d.question}
+
+Student outline:
+${d.outline}
+
+Task:
+Check the student's essay outline.
+
+Give feedback in this format:
+
+1. Overall judgement:
+Strong / Developing / Weak
+
+2. Requirement identification:
+- Is Requirement 1 correct?
+- Is Requirement 2 correct?
+- Is evaluation needed?
+
+3. What is done well:
+
+4. What is missing:
+
+5. Conceptual errors:
+
+6. Weak analysis chains:
+
+7. Missing diagram reference:
+
+8. Missing evidence / example:
+
+9. Link-back problem:
+
+10. Improved outline:
+Give an improved outline but do NOT write full paragraphs.
+
+Use simple language suitable for a 17-year-old student.`;
+
+  try{out.textContent=await callOpenRouter(prompt);}
+  catch(e){out.textContent='Error: '+e.message;}
+}
+
+async function checkReq1(){
+  const d=baseData();
+  const out=document.getElementById('req1Feedback');
+  out.textContent='AI is checking Requirement 1...';
+
+  const prompt=`Question type: ${d.essayType}
+
+Essay question:
+${d.question}
+
+Student outline:
+${d.outline}
+
+AI outline feedback:
+${d.outlineFeedback}
+
+Student Requirement 1 paragraph:
+${d.req1}
+
+Task:
+Check Requirement 1 paragraph using PEEL.
+
+Give feedback in this format:
+
+1. Overall judgement:
+Strong / Developing / Weak
+
+2. PEEL check:
+Point:
+Explain:
+Evidence / Example:
+Link:
+
+3. Economics accuracy:
+
+4. Analysis chain:
+- Is the chain logical?
+- Are there missing steps?
+
+5. Application to question:
+
+6. Diagram reference, if needed:
+
+7. Link back to question:
+
+8. How to improve:
+
+9. Improved Requirement 1 paragraph:
+Rewrite only Requirement 1 paragraph.`;
+
+  try{out.textContent=await callOpenRouter(prompt);}
+  catch(e){out.textContent='Error: '+e.message;}
+}
+
+async function checkReq2(){
+  const d=baseData();
+  const out=document.getElementById('req2Feedback');
+  out.textContent='AI is checking Requirement 2...';
+
+  const prompt=`Question type: ${d.essayType}
+
+Essay question:
+${d.question}
+
+Student outline:
+${d.outline}
+
+AI outline feedback:
+${d.outlineFeedback}
+
+Requirement 1 paragraph:
+${d.req1}
+
+AI feedback for Requirement 1:
+${d.req1Feedback}
+
+Student Requirement 2 paragraph:
+${d.req2}
+
+Task:
+Check Requirement 2 paragraph using PEEL.
+
+Give feedback in this format:
+
+1. Overall judgement:
+Strong / Developing / Weak
+
+2. PEEL check:
+Point:
+Explain:
+Evidence / Example:
+Link:
+
+3. Economics accuracy:
+
+4. Analysis chain:
+- Is the chain logical?
+- Are there missing steps?
+
+5. Application to question:
+
+6. Diagram reference, if needed:
+
+7. Link back to question:
+
+8. How to improve:
+
+9. Improved Requirement 2 paragraph:
+Rewrite only Requirement 2 paragraph.`;
+
+  try{out.textContent=await callOpenRouter(prompt);}
+  catch(e){out.textContent='Error: '+e.message;}
+}
+
+async function generateFullAnalysis(){
+  const d=baseData();
+  const out=document.getElementById('fullAnalysis');
+  out.textContent='AI is generating full analysis...';
+
+  const prompt=`Question type: ${d.essayType}
+
+Essay question:
+${d.question}
+
+Student outline:
+${d.outline}
+
+Outline feedback:
+${d.outlineFeedback}
+
+Requirement 1 paragraph:
+${d.req1}
+
+Requirement 1 feedback:
+${d.req1Feedback}
+
+Requirement 2 paragraph:
+${d.req2}
+
+Requirement 2 feedback:
+${d.req2Feedback}
+
+Task:
+Generate the full analysis for this essay question.
+
+Important:
+- Use the student's work and feedback as the base.
+- Write Requirement 1 analysis.
+- Write Requirement 2 analysis.
+- Use PEEL structure.
+- Include clear economic concepts.
+- Include step-by-step analysis chains.
+- Include diagram references where useful.
+- Include evidence / example.
+- Link back to the question.
+- If this is a 10m question, do NOT include evaluation.
+- If this is a 15m question, stop before evaluation and remind student to complete evaluation separately.
+
+Output format:
+Requirement 1 full analysis:
+Requirement 2 full analysis:
+What the student should remember:`;
+
+  try{out.textContent=await callOpenRouter(prompt);}
+  catch(e){out.textContent='Error: '+e.message;}
+}
+
+async function checkEvaluation(){
+  const d=baseData();
+  const framework=document.getElementById('evalFramework').value;
+  const studentEvaluation=document.getElementById('studentEvaluation').value;
+  const out=document.getElementById('evaluationFeedback');
+  out.textContent='AI is checking evaluation...';
+
+  const prompt=`Question type: ${d.essayType}
+
+Essay question:
+${d.question}
+
+Full analysis:
+${document.getElementById('fullAnalysis').textContent}
+
+Evaluation framework:
+${framework}
+
+Student evaluation:
+${studentEvaluation}
+
+Task:
+Check the student's evaluation.
+
+If this is a 10m question, remind the student that evaluation is not required.
+
+If this is a 15m question, check:
+
+1. Overall judgement:
+Strong / Developing / Weak
+
+2. Stand:
+Is there a clear stand?
+
+3. Support:
+Is the judgement supported by economic reasoning?
+
+4. Suggest / Condition:
+Is there a condition, limitation, or weighing?
+
+5. Final judgement:
+Does it answer the question directly?
+
+6. How to improve:
+
+7. Improved evaluation:
+Rewrite the evaluation clearly using ${framework}.`;
+
+  try{out.textContent=await callOpenRouter(prompt);}
+  catch(e){out.textContent='Error: '+e.message;}
+}
+
+function clearAll(){
+  document.querySelectorAll('textarea,input').forEach(x=>x.value='');
+  document.querySelectorAll('.output').forEach(x=>x.textContent='');
+}
+</script>
+</body>
+</html>
