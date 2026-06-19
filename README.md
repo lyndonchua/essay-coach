@@ -30,3 +30,7 @@ OPENROUTER_MODEL=openai/gpt-4o-mini
 ## Important
 
 Students will not see or type the OpenRouter API key. The key is hidden in Vercel environment variables.
+
+## Teacher Reference Answer
+
+In Step 1, the teacher can paste a full model answer or upload a `.txt` answer file. The AI uses this as the benchmark when checking the student outline, Requirement 1, Requirement 2, full analysis, and evaluation.

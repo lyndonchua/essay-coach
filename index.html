@@ -268,6 +268,16 @@ ol li,ul li{margin-bottom:7px}
 </select>
 <label>Essay Question</label>
 <textarea id="question" placeholder="Paste the essay question here..."></textarea>
+
+<details class="teacher-ref">
+  <summary>👩‍🏫 Teacher Reference Answer (optional)</summary>
+  <p class="file-note">Paste the full answer here, or upload a .txt answer file. The AI will use this as reference when giving feedback.</p>
+  <label>Upload Full Answer (.txt)</label>
+  <input id="modelAnswerFile" type="file" accept=".txt,.md,.text" onchange="loadModelAnswerFile(event)">
+  <label>Full Teacher Answer</label>
+  <textarea id="modelAnswer" placeholder="Paste the full teacher/model answer here for AI reference..."></textarea>
+</details>
+
 <label>Student Outline</label>
 <textarea id="studentOutline" placeholder="Write your outline here first before using AI..."></textarea>
 <button class="gray" onclick="insertOutlineTemplate()">🧩 Insert Outline Template</button>
@@ -378,6 +388,7 @@ function baseData(){
   return {
     essayType:document.getElementById('essayType').value,
     question:document.getElementById('question').value,
+    modelAnswer:document.getElementById('modelAnswer') ? document.getElementById('modelAnswer').value : '',
     outline:document.getElementById('studentOutline').value,
     outlineFeedback:document.getElementById('outlineFeedback').textContent,
     req1:document.getElementById('req1Paragraph').value,
@@ -385,6 +396,19 @@ function baseData(){
     req2:document.getElementById('req2Paragraph').value,
     req2Feedback:document.getElementById('req2Feedback').textContent
   };
+}
+
+function loadModelAnswerFile(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    document.getElementById('modelAnswer').value = e.target.result || '';
+  };
+  reader.onerror = function(){
+    alert('Could not read the file. Please paste the answer instead.');
+  };
+  reader.readAsText(file);
 }
 
 function insertOutlineTemplate(){
@@ -460,11 +484,15 @@ async function checkOutline(){
 Essay question:
 ${d.question}
 
+Teacher reference answer, if provided:
+${d.modelAnswer || 'No teacher reference answer provided.'}
+
 Student outline:
 ${d.outline}
 
 Task:
 Check the student's essay outline.
+Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
 
 Give feedback in this format:
 
@@ -509,6 +537,9 @@ async function checkReq1(){
 Essay question:
 ${d.question}
 
+Teacher reference answer, if provided:
+${d.modelAnswer || 'No teacher reference answer provided.'}
+
 Student outline:
 ${d.outline}
 
@@ -520,6 +551,7 @@ ${d.req1}
 
 Task:
 Check Requirement 1 paragraph using PEEL.
+Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
 
 Give feedback in this format:
 
@@ -563,6 +595,9 @@ async function checkReq2(){
 Essay question:
 ${d.question}
 
+Teacher reference answer, if provided:
+${d.modelAnswer || 'No teacher reference answer provided.'}
+
 Student outline:
 ${d.outline}
 
@@ -580,6 +615,7 @@ ${d.req2}
 
 Task:
 Check Requirement 2 paragraph using PEEL.
+Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
 
 Give feedback in this format:
 
@@ -623,6 +659,9 @@ async function generateFullAnalysis(){
 Essay question:
 ${d.question}
 
+Teacher reference answer, if provided:
+${d.modelAnswer || 'No teacher reference answer provided.'}
+
 Student outline:
 ${d.outline}
 
@@ -643,6 +682,7 @@ ${d.req2Feedback}
 
 Task:
 Generate the full analysis for this essay question.
+Use the teacher reference answer as the benchmark if it is provided, while still building from the student's work and feedback.
 
 Important:
 - Use the student's work and feedback as the base.
@@ -678,6 +718,9 @@ async function checkEvaluation(){
 Essay question:
 ${d.question}
 
+Teacher reference answer, if provided:
+${d.modelAnswer || 'No teacher reference answer provided.'}
+
 Full analysis:
 ${document.getElementById('fullAnalysis').textContent}
 
@@ -689,6 +732,7 @@ ${studentEvaluation}
 
 Task:
 Check the student's evaluation.
+Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
 
 If this is a 10m question, remind the student that evaluation is not required.
 
