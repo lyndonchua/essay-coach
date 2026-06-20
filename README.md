@@ -1,35 +1,38 @@
-# Economics Essay Coach
+# Economics Essay Writing Coach
 
-Firebase config has already been pasted directly into `index.html`.
+GitHub/Vercel-ready app.
 
-## Deploy on Vercel
+## Vercel Environment Variable Required
 
-1. Push this folder to GitHub.
-2. Import the GitHub repo into Vercel.
-3. Add this Vercel Environment Variable:
+Add this in Vercel → Project → Settings → Environment Variables:
 
-```
+```text
 OPENROUTER_API_KEY=your_openrouter_key_here
 ```
 
 Optional:
 
-```
+```text
 OPENROUTER_MODEL=openai/gpt-4o-mini
 ```
 
-4. Redeploy.
-
 ## Firebase
 
-The app records student attempts in Firestore collection:
+Firebase config is already pasted into `index.html` for project `essay-coach-f2f8a`.
 
-```
-econsEssayCoachSubmissions
-```
+## New build changes
 
-Teacher dashboard passcode:
+- Removed gamification references such as “Final Boss” and “Essay Power-Ups”.
+- Students can upload PDF/photo/text outline in Step 1.
+- Students can upload PDF/photo/text essay drafts in Requirement 1 and Requirement 2.
+- If a full essay contains both R1 and R2, students can upload the same file in both sections.
+- PDF text is extracted in the browser where possible.
+- Photos are sent to the AI for reading, so use a vision-capable OpenRouter model.
 
-```
+## Teacher Dashboard
+
+Passcode:
+
+```text
 0804
 ```

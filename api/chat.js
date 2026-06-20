@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'OPENROUTER_API_KEY is not set in Vercel environment variables.' });
   }
 
-  const { prompt } = req.body || {};
+  const { prompt, attachments = [] } = req.body || {};
   if (!prompt || !prompt.trim()) {
     return res.status(400).json({ error: 'No prompt provided.' });
   }
@@ -43,7 +43,15 @@ Important teaching rules:
           },
           {
             role: 'user',
-            content: prompt
+            content: [
+              { type: 'text', text: prompt },
+              ...attachments
+                .filter(a => a && a.type === 'image' && a.dataUrl)
+                .map(a => ({
+                  type: 'image_url',
+                  image_url: { url: a.dataUrl }
+                }))
+            ]
           }
         ],
         temperature: 0.35
