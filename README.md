@@ -2,18 +2,29 @@
 
 Student-facing Economics essay coach for 10m and 15m A-Level Economics essays.
 
+## Features
+
+- Student writes outline first
+- AI checks outline, Requirement 1, Requirement 2, full analysis and evaluation
+- Teacher can paste or upload a full answer as AI reference
+- Student feedback is recorded in Firebase Firestore
+- Teacher dashboard protected by passcode `0804`
+- Teacher can view records, class analytics, AI class analysis and export CSV
+- Students can download or email feedback to themselves
+- Students never see the OpenRouter API key
+
 ## Files
 
-- `index.html` — student app
+- `index.html` — student app and teacher dashboard
 - `api/chat.js` — Vercel serverless function that calls OpenRouter
+- `api/firebase-config.js` — sends Firebase config from Vercel environment variables to the frontend
 - `package.json` — basic project file
 
-## Deploy on Vercel
+## Vercel Environment Variables
 
-1. Upload these files to a GitHub repository.
-2. Import the repository into Vercel.
-3. In Vercel, go to Project Settings → Environment Variables.
-4. Add:
+Add these in Vercel → Project Settings → Environment Variables.
+
+### OpenRouter
 
 ```text
 OPENROUTER_API_KEY=your_openrouter_key_here
@@ -25,12 +36,43 @@ Optional:
 OPENROUTER_MODEL=openai/gpt-4o-mini
 ```
 
-5. Redeploy the project.
+### Firebase
 
-## Important
+```text
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+FIREBASE_APP_ID=your_app_id
+```
 
-Students will not see or type the OpenRouter API key. The key is hidden in Vercel environment variables.
+## Firebase Setup
 
-## Teacher Reference Answer
+1. Go to Firebase Console.
+2. Create or select a project.
+3. Create a Web App and copy the Firebase config values into Vercel Environment Variables.
+4. Enable Firestore Database.
+5. Start with test rules for classroom testing, then tighten later.
 
-In Step 1, the teacher can paste a full model answer or upload a `.txt` answer file. The AI uses this as the benchmark when checking the student outline, Requirement 1, Requirement 2, full analysis, and evaluation.
+Example testing rules:
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /econsEssayCoachSubmissions/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
+```
+
+Important: the teacher passcode is a classroom gate on the frontend, not strong security. For sensitive data, use Firebase Authentication later.
+
+## Deploy
+
+1. Push this project to GitHub.
+2. Import the repository into Vercel.
+3. Add all environment variables above.
+4. Redeploy.

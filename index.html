@@ -5,246 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Economics Essay Writing Coach</title>
 <style>
-:root{
-  --ink:#172033;
-  --muted:#64748b;
-  --line:#dbe4f0;
-  --card:#ffffff;
-  --blue:#2563eb;
-  --purple:#7c3aed;
-  --pink:#ec4899;
-  --green:#16a34a;
-  --orange:#f97316;
-  --red:#dc2626;
-  --yellow:#facc15;
-  --bg1:#fff7ed;
-  --bg2:#eff6ff;
-  --bg3:#f5f3ff;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at top left,rgba(250,204,21,.35),transparent 28%),
-    radial-gradient(circle at top right,rgba(236,72,153,.22),transparent 25%),
-    linear-gradient(135deg,var(--bg1),var(--bg2) 52%,var(--bg3));
-  min-height:100vh;
-}
-header{
-  position:relative;
-  overflow:hidden;
-  padding:28px 18px 34px;
-  text-align:center;
-  color:white;
-  background:linear-gradient(135deg,#111827,#1d4ed8 50%,#7c3aed);
-  border-bottom:6px solid rgba(255,255,255,.35);
-}
-header:before,header:after{
-  content:"";
-  position:absolute;
-  border-radius:999px;
-  opacity:.25;
-  background:white;
-}
-header:before{width:170px;height:170px;left:-50px;top:-70px}
-header:after{width:220px;height:220px;right:-70px;bottom:-110px}
-.logo-burst{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.15);
-  border:1px solid rgba(255,255,255,.25);
-  backdrop-filter:blur(8px);
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-header h1{margin:0;font-size:clamp(28px,5vw,46px);letter-spacing:-1px}
-header p{margin:8px 0 0;font-size:15px;opacity:.94}
-.container{max-width:1420px;margin:auto;padding:18px}
-.card{
-  background:rgba(255,255,255,.88);
-  border:1px solid rgba(255,255,255,.85);
-  border-radius:24px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 16px 38px rgba(30,41,59,.12);
-  backdrop-filter:blur(10px);
-}
-.hero-card{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:16px;
-  align-items:stretch;
-}
-.mission{
-  background:linear-gradient(135deg,#fff,#fef3c7);
-  border:2px solid rgba(250,204,21,.45);
-}
-.power-card{
-  background:linear-gradient(135deg,#ecfeff,#eef2ff);
-  border:2px solid rgba(37,99,235,.18);
-}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-h2{margin:0 0 12px;font-size:19px;letter-spacing:-.2px}
-h3{margin:12px 0 8px;font-size:15px}
-label{display:block;margin-top:11px;font-weight:800;font-size:13px;color:#334155}
-textarea,input,select{
-  width:100%;
-  margin-top:6px;
-  padding:12px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  font-size:14px;
-  background:#fff;
-  outline:none;
-  transition:.18s ease;
-}
-textarea:focus,input:focus,select:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
-textarea{min-height:140px;resize:vertical;line-height:1.45}
-button{
-  border:0;
-  border-radius:999px;
-  padding:10px 15px;
-  margin:9px 6px 0 0;
-  font-weight:900;
-  cursor:pointer;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  box-shadow:0 8px 18px rgba(37,99,235,.25);
-  transition:transform .14s ease,box-shadow .14s ease,filter .14s ease;
-}
-button:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(37,99,235,.32);filter:saturate(1.08)}
-button.gray{background:linear-gradient(135deg,#475569,#334155)}
-button.green{background:linear-gradient(135deg,#16a34a,#22c55e)}
-button.red{background:linear-gradient(135deg,#ef4444,#dc2626)}
-button.purple{background:linear-gradient(135deg,#7c3aed,#ec4899)}
-.output{
-  white-space:pre-wrap;
-  background:linear-gradient(135deg,#f8fafc,#ffffff);
-  border:1px solid var(--line);
-  padding:14px;
-  border-radius:18px;
-  min-height:150px;
-  font-size:14px;
-  line-height:1.55;
-}
-.tabs{
-  position:sticky;
-  top:0;
-  z-index:5;
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-bottom:16px;
-  padding:12px;
-  background:rgba(255,255,255,.74);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:24px;
-  backdrop-filter:blur(12px);
-  box-shadow:0 10px 28px rgba(15,23,42,.08);
-}
-.tab{
-  background:#eef2ff;
-  color:#1e293b;
-  box-shadow:none;
-  border:1px solid #dbe4ff;
-}
-.tab.active{
-  background:linear-gradient(135deg,#f97316,#ec4899,#7c3aed);
-  color:white;
-  border-color:transparent;
-}
-.section{display:none}
-.section.active{display:block}
-.small{font-size:13px;color:var(--muted)}
-ol,ul{padding-left:20px;margin:8px 0 0}
-ol li,ul li{margin-bottom:7px}
-.quest-map{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-}
-.quest-step{
-  padding:13px;
-  border-radius:20px;
-  background:#fff;
-  border:1px solid #e2e8f0;
-  box-shadow:0 8px 20px rgba(15,23,42,.06);
-}
-.step-num{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:30px;height:30px;
-  border-radius:10px;
-  color:white;
-  font-weight:900;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  margin-bottom:8px;
-}
-.quest-step b{display:block;font-size:14px;margin-bottom:4px}
-.quest-step span{font-size:12px;color:#64748b;line-height:1.35}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 2px}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:900}
-.badge.orange{background:#ffedd5;color:#9a3412}.badge.green{background:#dcfce7;color:#166534}.badge.pink{background:#fce7f3;color:#9d174d}
-.panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.spark{font-size:22px}
-.callout{
-  padding:12px 14px;
-  border-radius:18px;
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  color:#9a3412;
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:12px;
-}
-.footer-actions{text-align:center}
-@media(max-width:1050px){.hero-card,.grid{grid-template-columns:1fr}.quest-map{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.quest-map{grid-template-columns:1fr}header h1{font-size:30px}.tabs{position:static}.container{padding:12px}.card{border-radius:20px}}
+:root{--ink:#172033;--muted:#64748b;--line:#dbe4f0;--blue:#2563eb;--purple:#7c3aed;--pink:#ec4899;--green:#16a34a;--orange:#f97316;--red:#dc2626;--yellow:#facc15;--bg1:#fff7ed;--bg2:#eff6ff;--bg3:#f5f3ff}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(250,204,21,.35),transparent 28%),radial-gradient(circle at top right,rgba(236,72,153,.22),transparent 25%),linear-gradient(135deg,var(--bg1),var(--bg2) 52%,var(--bg3));min-height:100vh}header{position:relative;overflow:hidden;padding:28px 18px 34px;text-align:center;color:white;background:linear-gradient(135deg,#111827,#1d4ed8 50%,#7c3aed);border-bottom:6px solid rgba(255,255,255,.35)}header:before,header:after{content:"";position:absolute;border-radius:999px;opacity:.25;background:white}header:before{width:170px;height:170px;left:-50px;top:-70px}header:after{width:220px;height:220px;right:-70px;bottom:-110px}.logo-burst{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);font-size:13px;font-weight:900;margin-bottom:10px}header h1{margin:0;font-size:clamp(28px,5vw,46px);letter-spacing:-1px}header p{margin:8px 0 0;font-size:15px;opacity:.94}.container{max-width:1440px;margin:auto;padding:18px}.card{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.85);border-radius:24px;padding:18px;margin-bottom:16px;box-shadow:0 16px 38px rgba(30,41,59,.12);backdrop-filter:blur(10px)}.hero-card{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:stretch}.mission{background:linear-gradient(135deg,#fff,#fef3c7);border:2px solid rgba(250,204,21,.45)}.power-card{background:linear-gradient(135deg,#ecfeff,#eef2ff);border:2px solid rgba(37,99,235,.18)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}h2{margin:0 0 12px;font-size:19px;letter-spacing:-.2px}h3{margin:12px 0 8px;font-size:15px}label{display:block;margin-top:11px;font-weight:900;font-size:13px;color:#334155}textarea,input,select{width:100%;margin-top:6px;padding:12px;border:1px solid var(--line);border-radius:16px;font-size:14px;background:#fff;outline:none;transition:.18s ease}textarea:focus,input:focus,select:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(37,99,235,.12)}textarea{min-height:140px;resize:vertical;line-height:1.45}button{border:0;border-radius:999px;padding:10px 15px;margin:9px 6px 0 0;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;box-shadow:0 8px 18px rgba(37,99,235,.25);transition:transform .14s ease,box-shadow .14s ease,filter .14s ease}button:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(37,99,235,.32);filter:saturate(1.08)}button.gray{background:linear-gradient(135deg,#475569,#334155)}button.green{background:linear-gradient(135deg,#16a34a,#22c55e)}button.red{background:linear-gradient(135deg,#ef4444,#dc2626)}button.purple{background:linear-gradient(135deg,#7c3aed,#ec4899)}button.orange{background:linear-gradient(135deg,#f97316,#facc15);color:#431407}.output{white-space:pre-wrap;background:linear-gradient(135deg,#f8fafc,#ffffff);border:1px solid var(--line);padding:14px;border-radius:18px;min-height:150px;font-size:14px;line-height:1.55;max-height:520px;overflow:auto}.tabs{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px;padding:12px;background:rgba(255,255,255,.74);border:1px solid rgba(255,255,255,.8);border-radius:24px;backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(15,23,42,.08)}.tab{background:#eef2ff;color:#1e293b;box-shadow:none;border:1px solid #dbe4ff}.tab.active{background:linear-gradient(135deg,#f97316,#ec4899,#7c3aed);color:white;border-color:transparent}.section{display:none}.section.active{display:block}.small{font-size:13px;color:var(--muted)}ol,ul{padding-left:20px;margin:8px 0 0}ol li,ul li{margin-bottom:7px}.quest-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.quest-step{padding:13px;border-radius:20px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 8px 20px rgba(15,23,42,.06)}.step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:10px;color:white;font-weight:900;background:linear-gradient(135deg,#2563eb,#7c3aed);margin-bottom:8px}.quest-step b{display:block;font-size:14px;margin-bottom:4px}.quest-step span{font-size:12px;color:#64748b;line-height:1.35}.badges{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 2px}.badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:900}.badge.orange{background:#ffedd5;color:#9a3412}.badge.green{background:#dcfce7;color:#166534}.badge.pink{background:#fce7f3;color:#9d174d}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.spark{font-size:22px}.callout{padding:12px 14px;border-radius:18px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:13px;font-weight:800;margin-bottom:12px}.ok{background:#dcfce7;border-color:#86efac;color:#166534}.warn{background:#fef3c7;border-color:#fcd34d;color:#92400e}.stat{padding:16px;border-radius:20px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 10px 22px rgba(15,23,42,.06)}.stat b{display:block;font-size:26px}.stat span{font-size:12px;color:#64748b;font-weight:900}.table-wrap{overflow:auto;border-radius:16px;border:1px solid #e2e8f0;background:white}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}th{background:#f8fafc;font-size:12px;text-transform:uppercase;color:#475569}.footer-actions{text-align:center}.hidden{display:none!important}.pill-input{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.linkish{color:#2563eb;text-decoration:underline;cursor:pointer;font-weight:900}@media(max-width:1050px){.hero-card,.grid,.grid-3{grid-template-columns:1fr}.quest-map{grid-template-columns:1fr 1fr}.pill-input{grid-template-columns:1fr}}@media(max-width:620px){.quest-map{grid-template-columns:1fr}header h1{font-size:30px}.tabs{position:static}.container{padding:12px}.card{border-radius:20px}}
 </style>
 </head>
-
 <body>
 <header>
   <div class="logo-burst">🚀 SAJC ECONS QUEST MODE</div>
   <h1>Economics Essay Writing Coach</h1>
-  <p>10m & 15m essays • Outline first • PEEL paragraphs • Level up your analysis</p>
+  <p>10m & 15m essays • Outline first • PEEL paragraphs • Feedback saved for learning</p>
 </header>
 
 <div class="container">
+<div id="firebaseStatus" class="card callout warn">Firebase: checking connection...</div>
 
 <div class="hero-card">
   <div class="card mission">
     <div class="panel-title"><h2>🎮 How To Use This App</h2><span class="spark">✨</span></div>
     <div class="quest-map">
-      <div class="quest-step"><div class="step-num">1</div><b>Paste + Plan</b><span>Paste the question and write your outline first.</span></div>
-      <div class="quest-step"><div class="step-num">2</div><b>Check Outline</b><span>Click AI Check Outline and improve your plan.</span></div>
+      <div class="quest-step"><div class="step-num">1</div><b>Paste + Plan</b><span>Enter your details, paste the question, then write your own outline.</span></div>
+      <div class="quest-step"><div class="step-num">2</div><b>Check Outline</b><span>AI checks your plan against the teacher answer if provided.</span></div>
       <div class="quest-step"><div class="step-num">3</div><b>Write R1</b><span>Use feedback to write Requirement 1 using PEEL.</span></div>
       <div class="quest-step"><div class="step-num">4</div><b>Write R2</b><span>Use feedback to write Requirement 2 using PEEL.</span></div>
       <div class="quest-step"><div class="step-num">5</div><b>Final Boss</b><span>Generate full analysis. Add evaluation for 15m.</span></div>
     </div>
   </div>
-
   <div class="card power-card">
     <h2>🧠 Essay Power-Ups</h2>
-    <div class="badges">
-      <span class="badge">PEEL</span>
-      <span class="badge green">K/C/A</span>
-      <span class="badge orange">2 Requirements</span>
-      <span class="badge pink">SSS / FEAST</span>
-    </div>
-    <ul>
-      <li><b>10m:</b> 2 requirements, no evaluation.</li>
-      <li><b>15m:</b> 2 requirements + evaluation.</li>
-      <li>Do not skip the outline. Your paragraph must grow from your plan.</li>
-      <li>Every paragraph needs a clear link back to the question.</li>
-    </ul>
+    <div class="badges"><span class="badge">PEEL</span><span class="badge green">K/C/A</span><span class="badge orange">2 Requirements</span><span class="badge pink">SSS / FEAST</span></div>
+    <ul><li><b>10m:</b> 2 requirements, no evaluation.</li><li><b>15m:</b> 2 requirements + evaluation.</li><li>Teacher can paste/upload a reference answer.</li><li>Students can download or email feedback to themselves.</li></ul>
   </div>
 </div>
 
@@ -254,518 +42,107 @@ ol li,ul li{margin-bottom:7px}
 <button class="tab" onclick="showTab('r2',this)">⚡ Step 3: Requirement 2</button>
 <button class="tab" onclick="showTab('full',this)">🏆 Step 4: Full Analysis</button>
 <button class="tab" onclick="showTab('eval',this)">🎯 Step 5: Evaluation</button>
+<button class="tab" onclick="showTab('teacher',this)">🔐 Teacher Data</button>
 </div>
 
 <div id="setup" class="section active">
 <div class="grid">
 <div class="card">
-<div class="panel-title"><h2>📝 Step 1A: Paste Question + Build Outline</h2><span class="badge orange">Start here</span></div>
-<div class="callout">Mission: write your own outline before asking for feedback. No outline = no strong essay.</div>
-<label>Question Type</label>
-<select id="essayType">
-<option value="10m">10m Part (a) Explain Question</option>
-<option value="15m">15m Part (b) Discuss Question</option>
-</select>
-<label>Essay Question</label>
-<textarea id="question" placeholder="Paste the essay question here..."></textarea>
-
-<details class="teacher-ref">
-  <summary>👩‍🏫 Teacher Reference Answer (optional)</summary>
-  <p class="file-note">Paste the full answer here, or upload a .txt answer file. The AI will use this as reference when giving feedback.</p>
-  <label>Upload Full Answer (.txt)</label>
-  <input id="modelAnswerFile" type="file" accept=".txt,.md,.text" onchange="loadModelAnswerFile(event)">
-  <label>Full Teacher Answer</label>
-  <textarea id="modelAnswer" placeholder="Paste the full teacher/model answer here for AI reference..."></textarea>
-</details>
-
-<label>Student Outline</label>
-<textarea id="studentOutline" placeholder="Write your outline here first before using AI..."></textarea>
-<button class="gray" onclick="insertOutlineTemplate()">🧩 Insert Outline Template</button>
-<button onclick="checkOutline()">🔍 AI Check Outline</button>
+<h2>Step 1A: Your Details + Question</h2>
+<div class="pill-input"><div><label>Name</label><input id="studentName" placeholder="e.g. Aaron Tan"></div><div><label>Class</label><input id="studentClass" placeholder="e.g. 26A03"></div><div><label>Email</label><input id="studentEmail" type="email" placeholder="student@email.com"></div></div>
+<label>Question Type</label><select id="essayType"><option value="10m">10m Part (a) Explain Question</option><option value="15m">15m Part (b) Discuss Question</option></select>
+<label>Essay Question</label><textarea id="question" placeholder="Paste the essay question here..."></textarea>
+<label>Student Outline</label><textarea id="studentOutline" placeholder="Write your outline here first before using AI..."></textarea>
+<button class="gray" onclick="insertOutlineTemplate()">Insert Outline Template</button><button onclick="checkOutline()">AI Check Outline</button>
 </div>
 <div class="card">
-<div class="panel-title"><h2>💬 Step 1B: Outline Feedback</h2><span class="badge green">Improve plan</span></div>
-<div id="outlineFeedback" class="output"></div>
+<h2>Teacher Reference Answer</h2>
+<div class="callout">Teacher use: paste the full model answer here, or upload a .txt file. Students can leave this blank.</div>
+<label>Upload .txt Answer</label><input id="teacherFile" type="file" accept=".txt,text/plain" onchange="loadTeacherFile(event)">
+<label>Full Teacher Answer</label><textarea id="teacherAnswer" placeholder="Paste full suggested answer here. AI will use this as a benchmark when giving feedback."></textarea>
+<button class="orange" onclick="saveTeacherReferenceOnly()">Save Teacher Reference</button>
 </div>
+</div>
+<div class="card"><h2>Step 1B: AI Outline Feedback</h2><div id="outlineFeedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div>
+</div>
+
+<div id="r1" class="section"><div class="grid"><div class="card"><h2>Step 2A: Requirement 1 Paragraph</h2><p class="small">Use your outline feedback before writing.</p><label>Requirement 1 Paragraph</label><textarea id="req1Paragraph" placeholder="Write Requirement 1 paragraph using PEEL..."></textarea><button class="gray" onclick="insertPEEL('req1Paragraph')">Insert PEEL Template</button><button onclick="checkReq1()">AI Check Requirement 1</button></div><div class="card"><h2>Step 2B: AI Feedback for Requirement 1</h2><div id="req1Feedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
+
+<div id="r2" class="section"><div class="grid"><div class="card"><h2>Step 3A: Requirement 2 Paragraph</h2><p class="small">Use the outline feedback and Requirement 1 feedback before writing.</p><label>Requirement 2 Paragraph</label><textarea id="req2Paragraph" placeholder="Write Requirement 2 paragraph using PEEL..."></textarea><button class="gray" onclick="insertPEEL('req2Paragraph')">Insert PEEL Template</button><button onclick="checkReq2()">AI Check Requirement 2</button></div><div class="card"><h2>Step 3B: AI Feedback for Requirement 2</h2><div id="req2Feedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
+
+<div id="full" class="section"><div class="card"><h2>Step 4: AI Full Analysis</h2><p class="small">This combines the question, teacher reference answer, student outline, Requirement 1, Requirement 2, and all feedback.</p><button class="purple" onclick="generateFullAnalysis()">Generate Full Analysis</button><div id="fullAnalysis" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div>
+
+<div id="eval" class="section"><div class="grid"><div class="card"><h2>Step 5A: Evaluation for 15m Part (b)</h2><p class="small">Only needed for 15m part (b) questions.</p><label>Evaluation Framework</label><select id="evalFramework"><option value="SSS">SSS: Stand, Support, Suggest</option><option value="FEAST">FEAST: Feasibility, Effectiveness, Appropriateness, Side Effects, Time Period</option></select><label>Student Evaluation</label><textarea id="studentEvaluation" placeholder="Write your evaluation here..."></textarea><button class="gray" onclick="insertEvalTemplate()">Insert Evaluation Template</button><button onclick="checkEvaluation()">AI Check Evaluation</button></div><div class="card"><h2>Step 5B: AI Evaluation Feedback</h2><div id="evaluationFeedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
+
+<div id="teacher" class="section">
+<div id="passcodeCard" class="card"><h2>🔐 Teacher Dashboard</h2><p class="small">Enter teacher passcode to view stored attempts and class data.</p><label>Passcode</label><input id="teacherPasscode" type="password" placeholder="Teacher passcode"><button onclick="unlockTeacher()">Unlock</button><div id="passcodeMessage" class="small"></div></div>
+<div id="teacherDashboard" class="hidden">
+<div class="grid-3"><div class="stat"><b id="statAttempts">0</b><span>Total saved records</span></div><div class="stat"><b id="statStudents">0</b><span>Students</span></div><div class="stat"><b id="statClasses">0</b><span>Classes</span></div></div>
+<div class="card"><h2>📊 Data Analysis</h2><div id="analyticsOutput" class="output"></div><button onclick="refreshTeacherData()">Refresh Data</button><button class="green" onclick="exportCSV()">Export CSV</button><button class="purple" onclick="aiAnalyseClassData()">AI Analyse Class Data</button></div>
+<div class="card"><h2>🗂 Saved Student Records</h2><div class="table-wrap"><table><thead><tr><th>Date</th><th>Name</th><th>Class</th><th>Stage</th><th>Question</th><th>Feedback Preview</th></tr></thead><tbody id="recordsBody"></tbody></table></div></div>
+<div class="card"><h2>🤖 AI Class Analysis</h2><div id="teacherAiAnalysis" class="output"></div></div>
 </div>
 </div>
 
-<div id="r1" class="section">
-<div class="grid">
-<div class="card">
-<div class="panel-title"><h2>🔥 Step 2A: Requirement 1 Paragraph</h2><span class="badge">PEEL</span></div>
-<p class="small">Use your outline feedback before writing. Focus on one clear requirement only.</p>
-<label>Requirement 1 Paragraph</label>
-<textarea id="req1Paragraph" placeholder="Write Requirement 1 paragraph using PEEL..."></textarea>
-<button class="gray" onclick="insertPEEL('req1Paragraph')">🧱 Insert PEEL Template</button>
-<button onclick="checkReq1()">🔍 AI Check Requirement 1</button>
-</div>
-<div class="card">
-<div class="panel-title"><h2>💬 Step 2B: Feedback for Requirement 1</h2><span class="badge green">Level up</span></div>
-<div id="req1Feedback" class="output"></div>
-</div>
-</div>
+<div class="card footer-actions"><button class="red" onclick="clearAll()">Clear Current Student Work</button></div>
 </div>
 
-<div id="r2" class="section">
-<div class="grid">
-<div class="card">
-<div class="panel-title"><h2>⚡ Step 3A: Requirement 2 Paragraph</h2><span class="badge">PEEL</span></div>
-<p class="small">Use the outline feedback and Requirement 1 feedback before writing.</p>
-<label>Requirement 2 Paragraph</label>
-<textarea id="req2Paragraph" placeholder="Write Requirement 2 paragraph using PEEL..."></textarea>
-<button class="gray" onclick="insertPEEL('req2Paragraph')">🧱 Insert PEEL Template</button>
-<button onclick="checkReq2()">🔍 AI Check Requirement 2</button>
-</div>
-<div class="card">
-<div class="panel-title"><h2>💬 Step 3B: Feedback for Requirement 2</h2><span class="badge green">Level up</span></div>
-<div id="req2Feedback" class="output"></div>
-</div>
-</div>
-</div>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orderBy, limit } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-<div id="full" class="section">
-<div class="card">
-<div class="panel-title"><h2>🏆 Step 4: Full Analysis</h2><span class="badge pink">Final boss</span></div>
-<p class="small">This combines the question, student outline, Requirement 1, Requirement 2, and all feedback.</p>
-<button class="purple" onclick="generateFullAnalysis()">🏆 Generate Full Analysis</button>
-<div id="fullAnalysis" class="output"></div>
-</div>
-</div>
+let db=null, firebaseReady=false, cachedRecords=[];
+const COLLECTION='econsEssayCoachSubmissions';
 
-<div id="eval" class="section">
-<div class="grid">
-<div class="card">
-<div class="panel-title"><h2>🎯 Step 5A: Evaluation for 15m Part (b)</h2><span class="badge orange">15m only</span></div>
-<p class="small">Only needed for 15m part (b) questions.</p>
-<label>Evaluation Framework</label>
-<select id="evalFramework">
-<option value="SSS">SSS: Stand, Support, Suggest</option>
-<option value="FEAST">FEAST: Feasibility, Effectiveness, Appropriateness, Side Effects, Time Period</option>
-</select>
-<label>Student Evaluation</label>
-<textarea id="studentEvaluation" placeholder="Write your evaluation here..."></textarea>
-<button class="gray" onclick="insertEvalTemplate()">🧩 Insert Evaluation Template</button>
-<button onclick="checkEvaluation()">🔍 AI Check Evaluation</button>
-</div>
-<div class="card">
-<div class="panel-title"><h2>💬 Step 5B: Evaluation Feedback</h2><span class="badge green">Judgement boost</span></div>
-<div id="evaluationFeedback" class="output"></div>
-</div>
-</div>
-</div>
-
-<div class="card footer-actions">
-<button class="red" onclick="clearAll()">🧹 Clear All</button>
-</div>
-</div>
-
-<script>
-function showTab(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
-
-async function callOpenRouter(prompt){
-  const response=await fetch('/api/chat',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({prompt})
-  });
-
-  const data=await response.json();
-
-  if(!response.ok){
-    throw new Error(data.error || 'AI request failed.');
+async function initFirebase(){
+  const status=document.getElementById('firebaseStatus');
+  try{
+    const res=await fetch('/api/firebase-config');
+    const config=await res.json();
+    if(!res.ok) throw new Error(config.error || 'Firebase config failed.');
+    const app=initializeApp(config);
+    db=getFirestore(app);
+    firebaseReady=true;
+    status.textContent='Firebase: connected. Student feedback will be recorded for teacher analysis.';
+    status.className='card callout ok';
+  }catch(e){
+    firebaseReady=false;
+    status.textContent='Firebase not connected yet: '+e.message+' Add Firebase environment variables in Vercel.';
+    status.className='card callout warn';
   }
-
-  return data.reply || 'No response generated.';
 }
+initFirebase();
 
-function baseData(){
-  return {
-    essayType:document.getElementById('essayType').value,
-    question:document.getElementById('question').value,
-    modelAnswer:document.getElementById('modelAnswer') ? document.getElementById('modelAnswer').value : '',
-    outline:document.getElementById('studentOutline').value,
-    outlineFeedback:document.getElementById('outlineFeedback').textContent,
-    req1:document.getElementById('req1Paragraph').value,
-    req1Feedback:document.getElementById('req1Feedback').textContent,
-    req2:document.getElementById('req2Paragraph').value,
-    req2Feedback:document.getElementById('req2Feedback').textContent
-  };
-}
-
-function loadModelAnswerFile(event){
-  const file = event.target.files && event.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e){
-    document.getElementById('modelAnswer').value = e.target.result || '';
-  };
-  reader.onerror = function(){
-    alert('Could not read the file. Please paste the answer instead.');
-  };
-  reader.readAsText(file);
-}
-
-function insertOutlineTemplate(){
-  document.getElementById('studentOutline').value =
-`Requirement 1:
-Point:
-Economic concept:
-Analysis chain:
-1.
-2.
-3.
-4.
-Diagram:
-Evidence / Example:
-Link back to question:
-
-Requirement 2:
-Point:
-Economic concept:
-Analysis chain:
-1.
-2.
-3.
-4.
-Diagram:
-Evidence / Example:
-Link back to question:
-
-Evaluation, if 15m:
-Stand:
-Support:
-Suggest:
-Final judgement:`;
-}
-
-function insertPEEL(id){
-  document.getElementById(id).value =
-`Point:
-State the main argument.
-
-Explain:
-Explain the economic concept and analysis chain.
-
-Evidence / Example:
-Apply to the context in the question.
-
-Link:
-Link back directly to the question.`;
-}
-
-function insertEvalTemplate(){
-  document.getElementById('studentEvaluation').value =
-`Stand:
-State your overall judgement.
-
-Support:
-Explain why this judgement is valid.
-
-Suggest / Condition:
-Explain when this judgement may change.
-
-Final judgement:
-Link directly back to the question.`;
-}
-
-async function checkOutline(){
+function showTab(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+async function callOpenRouter(prompt){const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});const data=await response.json();if(!response.ok) throw new Error(data.error || 'AI request failed.');return data.reply || 'No response generated.'}
+function baseData(){return{studentName:document.getElementById('studentName').value.trim(),studentClass:document.getElementById('studentClass').value.trim(),studentEmail:document.getElementById('studentEmail').value.trim(),essayType:document.getElementById('essayType').value,question:document.getElementById('question').value,teacherAnswer:document.getElementById('teacherAnswer').value,outline:document.getElementById('studentOutline').value,outlineFeedback:document.getElementById('outlineFeedback').textContent,req1:document.getElementById('req1Paragraph').value,req1Feedback:document.getElementById('req1Feedback').textContent,req2:document.getElementById('req2Paragraph').value,req2Feedback:document.getElementById('req2Feedback').textContent,fullAnalysis:document.getElementById('fullAnalysis').textContent,evaluation:document.getElementById('studentEvaluation').value,evaluationFeedback:document.getElementById('evaluationFeedback').textContent}}
+function commonPromptBlock(d){return`Student details: ${d.studentName || 'Not provided'} / ${d.studentClass || 'Not provided'}\nQuestion type: ${d.essayType}\nEssay question:\n${d.question}\n\nTeacher reference answer, if available:\n${d.teacherAnswer || 'No teacher reference answer provided.'}\n`}
+async function saveRecord(stage, studentWork, aiFeedback){
   const d=baseData();
-  const out=document.getElementById('outlineFeedback');
-  out.textContent='AI is checking the outline...';
-
-  const prompt=`Question type: ${d.essayType}
-
-Essay question:
-${d.question}
-
-Teacher reference answer, if provided:
-${d.modelAnswer || 'No teacher reference answer provided.'}
-
-Student outline:
-${d.outline}
-
-Task:
-Check the student's essay outline.
-Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
-
-Give feedback in this format:
-
-1. Overall judgement:
-Strong / Developing / Weak
-
-2. Requirement identification:
-- Is Requirement 1 correct?
-- Is Requirement 2 correct?
-- Is evaluation needed?
-
-3. What is done well:
-
-4. What is missing:
-
-5. Conceptual errors:
-
-6. Weak analysis chains:
-
-7. Missing diagram reference:
-
-8. Missing evidence / example:
-
-9. Link-back problem:
-
-10. Improved outline:
-Give an improved outline but do NOT write full paragraphs.
-
-Use simple language suitable for a 17-year-old student.`;
-
-  try{out.textContent=await callOpenRouter(prompt);}
-  catch(e){out.textContent='Error: '+e.message;}
+  const payload={createdAt:serverTimestamp(),createdAtLocal:new Date().toISOString(),stage,studentName:d.studentName || 'Unknown',studentClass:d.studentClass || 'Unknown',studentEmail:d.studentEmail || '',essayType:d.essayType,question:d.question,teacherAnswer:d.teacherAnswer,studentOutline:d.outline,req1:d.req1,req2:d.req2,evaluation:d.evaluation,studentWork,aiFeedback,outlineFeedback:d.outlineFeedback,req1Feedback:d.req1Feedback,req2Feedback:d.req2Feedback,fullAnalysis:d.fullAnalysis,evaluationFeedback:d.evaluationFeedback};
+  if(firebaseReady && db){try{await addDoc(collection(db,COLLECTION),payload)}catch(e){console.warn('Firestore save failed',e)}}
 }
-
-async function checkReq1(){
-  const d=baseData();
-  const out=document.getElementById('req1Feedback');
-  out.textContent='AI is checking Requirement 1...';
-
-  const prompt=`Question type: ${d.essayType}
-
-Essay question:
-${d.question}
-
-Teacher reference answer, if provided:
-${d.modelAnswer || 'No teacher reference answer provided.'}
-
-Student outline:
-${d.outline}
-
-AI outline feedback:
-${d.outlineFeedback}
-
-Student Requirement 1 paragraph:
-${d.req1}
-
-Task:
-Check Requirement 1 paragraph using PEEL.
-Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
-
-Give feedback in this format:
-
-1. Overall judgement:
-Strong / Developing / Weak
-
-2. PEEL check:
-Point:
-Explain:
-Evidence / Example:
-Link:
-
-3. Economics accuracy:
-
-4. Analysis chain:
-- Is the chain logical?
-- Are there missing steps?
-
-5. Application to question:
-
-6. Diagram reference, if needed:
-
-7. Link back to question:
-
-8. How to improve:
-
-9. Improved Requirement 1 paragraph:
-Rewrite only Requirement 1 paragraph.`;
-
-  try{out.textContent=await callOpenRouter(prompt);}
-  catch(e){out.textContent='Error: '+e.message;}
-}
-
-async function checkReq2(){
-  const d=baseData();
-  const out=document.getElementById('req2Feedback');
-  out.textContent='AI is checking Requirement 2...';
-
-  const prompt=`Question type: ${d.essayType}
-
-Essay question:
-${d.question}
-
-Teacher reference answer, if provided:
-${d.modelAnswer || 'No teacher reference answer provided.'}
-
-Student outline:
-${d.outline}
-
-AI outline feedback:
-${d.outlineFeedback}
-
-Requirement 1 paragraph:
-${d.req1}
-
-AI feedback for Requirement 1:
-${d.req1Feedback}
-
-Student Requirement 2 paragraph:
-${d.req2}
-
-Task:
-Check Requirement 2 paragraph using PEEL.
-Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
-
-Give feedback in this format:
-
-1. Overall judgement:
-Strong / Developing / Weak
-
-2. PEEL check:
-Point:
-Explain:
-Evidence / Example:
-Link:
-
-3. Economics accuracy:
-
-4. Analysis chain:
-- Is the chain logical?
-- Are there missing steps?
-
-5. Application to question:
-
-6. Diagram reference, if needed:
-
-7. Link back to question:
-
-8. How to improve:
-
-9. Improved Requirement 2 paragraph:
-Rewrite only Requirement 2 paragraph.`;
-
-  try{out.textContent=await callOpenRouter(prompt);}
-  catch(e){out.textContent='Error: '+e.message;}
-}
-
-async function generateFullAnalysis(){
-  const d=baseData();
-  const out=document.getElementById('fullAnalysis');
-  out.textContent='AI is generating full analysis...';
-
-  const prompt=`Question type: ${d.essayType}
-
-Essay question:
-${d.question}
-
-Teacher reference answer, if provided:
-${d.modelAnswer || 'No teacher reference answer provided.'}
-
-Student outline:
-${d.outline}
-
-Outline feedback:
-${d.outlineFeedback}
-
-Requirement 1 paragraph:
-${d.req1}
-
-Requirement 1 feedback:
-${d.req1Feedback}
-
-Requirement 2 paragraph:
-${d.req2}
-
-Requirement 2 feedback:
-${d.req2Feedback}
-
-Task:
-Generate the full analysis for this essay question.
-Use the teacher reference answer as the benchmark if it is provided, while still building from the student's work and feedback.
-
-Important:
-- Use the student's work and feedback as the base.
-- Write Requirement 1 analysis.
-- Write Requirement 2 analysis.
-- Use PEEL structure.
-- Include clear economic concepts.
-- Include step-by-step analysis chains.
-- Include diagram references where useful.
-- Include evidence / example.
-- Link back to the question.
-- If this is a 10m question, do NOT include evaluation.
-- If this is a 15m question, stop before evaluation and remind student to complete evaluation separately.
-
-Output format:
-Requirement 1 full analysis:
-Requirement 2 full analysis:
-What the student should remember:`;
-
-  try{out.textContent=await callOpenRouter(prompt);}
-  catch(e){out.textContent='Error: '+e.message;}
-}
-
-async function checkEvaluation(){
-  const d=baseData();
-  const framework=document.getElementById('evalFramework').value;
-  const studentEvaluation=document.getElementById('studentEvaluation').value;
-  const out=document.getElementById('evaluationFeedback');
-  out.textContent='AI is checking evaluation...';
-
-  const prompt=`Question type: ${d.essayType}
-
-Essay question:
-${d.question}
-
-Teacher reference answer, if provided:
-${d.modelAnswer || 'No teacher reference answer provided.'}
-
-Full analysis:
-${document.getElementById('fullAnalysis').textContent}
-
-Evaluation framework:
-${framework}
-
-Student evaluation:
-${studentEvaluation}
-
-Task:
-Check the student's evaluation.
-Use the teacher reference answer as the benchmark if it is provided. If it is not provided, use A-Level Economics standards.
-
-If this is a 10m question, remind the student that evaluation is not required.
-
-If this is a 15m question, check:
-
-1. Overall judgement:
-Strong / Developing / Weak
-
-2. Stand:
-Is there a clear stand?
-
-3. Support:
-Is the judgement supported by economic reasoning?
-
-4. Suggest / Condition:
-Is there a condition, limitation, or weighing?
-
-5. Final judgement:
-Does it answer the question directly?
-
-6. How to improve:
-
-7. Improved evaluation:
-Rewrite the evaluation clearly using ${framework}.`;
-
-  try{out.textContent=await callOpenRouter(prompt);}
-  catch(e){out.textContent='Error: '+e.message;}
-}
-
-function clearAll(){
-  document.querySelectorAll('textarea,input').forEach(x=>x.value='');
-  document.querySelectorAll('.output').forEach(x=>x.textContent='');
-}
+function allFeedbackText(){const d=baseData();return`Economics Essay Coach Feedback\n\nName: ${d.studentName}\nClass: ${d.studentClass}\nEmail: ${d.studentEmail}\nQuestion Type: ${d.essayType}\n\nQUESTION\n${d.question}\n\nSTUDENT OUTLINE\n${d.outline}\n\nOUTLINE FEEDBACK\n${d.outlineFeedback}\n\nREQUIREMENT 1\n${d.req1}\n\nREQUIREMENT 1 FEEDBACK\n${d.req1Feedback}\n\nREQUIREMENT 2\n${d.req2}\n\nREQUIREMENT 2 FEEDBACK\n${d.req2Feedback}\n\nFULL ANALYSIS\n${d.fullAnalysis}\n\nEVALUATION\n${d.evaluation}\n\nEVALUATION FEEDBACK\n${d.evaluationFeedback}\n`}
+function downloadFeedback(){const d=baseData();const blob=new Blob([allFeedbackText()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');const safeName=(d.studentName||'student').replace(/[^a-z0-9_-]/gi,'_');a.href=URL.createObjectURL(blob);a.download=`econs_feedback_${safeName}_${new Date().toISOString().slice(0,10)}.txt`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href)}
+function emailFeedback(){const d=baseData();const to=d.studentEmail || '';const subject=encodeURIComponent('Economics Essay Feedback');let body=allFeedbackText();if(body.length>7000){body=body.slice(0,7000)+'\n\n[Feedback was shortened for email. Please use Download Feedback for the full version.]'}window.location.href=`mailto:${encodeURIComponent(to)}?subject=${subject}&body=${encodeURIComponent(body)}`}
+function insertOutlineTemplate(){document.getElementById('studentOutline').value=`Requirement 1:\nPoint:\nEconomic concept:\nAnalysis chain:\n1.\n2.\n3.\n4.\nDiagram:\nEvidence / Example:\nLink back to question:\n\nRequirement 2:\nPoint:\nEconomic concept:\nAnalysis chain:\n1.\n2.\n3.\n4.\nDiagram:\nEvidence / Example:\nLink back to question:\n\nEvaluation, if 15m:\nStand:\nSupport:\nSuggest:\nFinal judgement:`}
+function insertPEEL(id){document.getElementById(id).value=`Point:\nState the main argument.\n\nExplain:\nExplain the economic concept and analysis chain.\n\nEvidence / Example:\nApply to the context in the question.\n\nLink:\nLink back directly to the question.`}
+function insertEvalTemplate(){document.getElementById('studentEvaluation').value=`Stand:\nState your overall judgement.\n\nSupport:\nExplain why this judgement is valid.\n\nSuggest / Condition:\nExplain when this judgement may change.\n\nFinal judgement:\nLink directly back to the question.`}
+function loadTeacherFile(event){const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{document.getElementById('teacherAnswer').value=reader.result || ''};reader.readAsText(file)}
+async function saveTeacherReferenceOnly(){await saveRecord('teacher_reference_saved',document.getElementById('teacherAnswer').value,'Teacher reference answer saved in this attempt.');alert('Teacher reference saved for this session and will be used in AI feedback.')}
+async function checkOutline(){const d=baseData();const out=document.getElementById('outlineFeedback');out.textContent='AI is checking the outline...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\n\nTask: Assess the student's essay outline against the question and teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. Requirement identification: Is Requirement 1 correct? Is Requirement 2 correct? Is evaluation needed?\n3. Reference answer match: What important ideas from the teacher answer are included or missing?\n4. What is done well:\n5. What is missing:\n6. Conceptual errors:\n7. Weak analysis chains:\n8. Missing diagram reference:\n9. Missing evidence / example:\n10. Link-back problem:\n11. Improved outline: Give an improved outline but do NOT write full paragraphs.\n12. Data tags: list 3 weakness tags separated by commas.\n\nUse simple language suitable for a 17-year-old student.`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('outline_feedback',d.outline,reply)}catch(e){out.textContent='Error: '+e.message}}
+async function checkReq1(){const d=baseData();const out=document.getElementById('req1Feedback');out.textContent='AI is checking Requirement 1...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nAI outline feedback:\n${d.outlineFeedback}\nStudent Requirement 1 paragraph:\n${d.req1}\n\nTask: Check Requirement 1 paragraph using PEEL and compare with teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. PEEL check: Point / Explain / Evidence or Example / Link\n3. Reference answer match: important ideas included or missing\n4. Economics accuracy:\n5. Analysis chain: logical? missing steps?\n6. Application to question:\n7. Diagram reference, if needed:\n8. Link back to question:\n9. How to improve:\n10. Improved Requirement 1 paragraph: Rewrite only Requirement 1 paragraph.\n11. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('requirement_1_feedback',d.req1,reply)}catch(e){out.textContent='Error: '+e.message}}
+async function checkReq2(){const d=baseData();const out=document.getElementById('req2Feedback');out.textContent='AI is checking Requirement 2...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nAI outline feedback:\n${d.outlineFeedback}\nRequirement 1 paragraph:\n${d.req1}\nAI feedback for Requirement 1:\n${d.req1Feedback}\nStudent Requirement 2 paragraph:\n${d.req2}\n\nTask: Check Requirement 2 paragraph using PEEL and compare with teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. PEEL check: Point / Explain / Evidence or Example / Link\n3. Reference answer match: important ideas included or missing\n4. Economics accuracy:\n5. Analysis chain: logical? missing steps?\n6. Application to question:\n7. Diagram reference, if needed:\n8. Link back to question:\n9. How to improve:\n10. Improved Requirement 2 paragraph: Rewrite only Requirement 2 paragraph.\n11. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('requirement_2_feedback',d.req2,reply)}catch(e){out.textContent='Error: '+e.message}}
+async function generateFullAnalysis(){const d=baseData();const out=document.getElementById('fullAnalysis');out.textContent='AI is generating full analysis...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nOutline feedback:\n${d.outlineFeedback}\nRequirement 1 paragraph:\n${d.req1}\nRequirement 1 feedback:\n${d.req1Feedback}\nRequirement 2 paragraph:\n${d.req2}\nRequirement 2 feedback:\n${d.req2Feedback}\n\nTask: Generate the full analysis for this essay question. Use the student's work, teacher reference answer and feedback as the base. Write Requirement 1 analysis and Requirement 2 analysis using PEEL. Include economic concepts, analysis chains, diagram references, evidence/example and link back. If this is 10m, do not include evaluation. If 15m, stop before evaluation and remind student to complete evaluation separately.\n\nOutput format:\nRequirement 1 full analysis:\nRequirement 2 full analysis:\nWhat the student should remember:`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('full_analysis',`${d.req1}\n\n${d.req2}`,reply)}catch(e){out.textContent='Error: '+e.message}}
+async function checkEvaluation(){const d=baseData();const framework=document.getElementById('evalFramework').value;const out=document.getElementById('evaluationFeedback');out.textContent='AI is checking evaluation...';const prompt=`${commonPromptBlock(d)}\nFull analysis:\n${d.fullAnalysis}\nEvaluation framework: ${framework}\nStudent evaluation:\n${d.evaluation}\n\nTask: Check the student's evaluation. If 10m, remind student evaluation is not required. If 15m, check stand, support, condition/weighing and final judgement. Compare against teacher reference answer if available.\n\nGive:\n1. Overall judgement: Strong / Developing / Weak\n2. Stand:\n3. Support:\n4. Suggest / Condition:\n5. Final judgement:\n6. Reference answer match:\n7. How to improve:\n8. Improved evaluation using ${framework}:\n9. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('evaluation_feedback',d.evaluation,reply)}catch(e){out.textContent='Error: '+e.message}}
+function unlockTeacher(){const pass=document.getElementById('teacherPasscode').value;if(pass==='0804'){document.getElementById('passcodeCard').classList.add('hidden');document.getElementById('teacherDashboard').classList.remove('hidden');refreshTeacherData()}else{document.getElementById('passcodeMessage').textContent='Wrong passcode.'}}
+async function refreshTeacherData(){if(!firebaseReady||!db){document.getElementById('analyticsOutput').textContent='Firebase is not connected. Add Firebase environment variables in Vercel and redeploy.';return}const q=query(collection(db,COLLECTION),orderBy('createdAtLocal','desc'),limit(300));const snap=await getDocs(q);cachedRecords=snap.docs.map(doc=>({id:doc.id,...doc.data()}));renderTeacherData(cachedRecords)}
+function renderTeacherData(records){document.getElementById('statAttempts').textContent=records.length;document.getElementById('statStudents').textContent=new Set(records.map(r=>r.studentName).filter(Boolean)).size;document.getElementById('statClasses').textContent=new Set(records.map(r=>r.studentClass).filter(Boolean)).size;const stageCounts={}, classCounts={}, weaknessCounts={};records.forEach(r=>{stageCounts[r.stage]=(stageCounts[r.stage]||0)+1;classCounts[r.studentClass]=(classCounts[r.studentClass]||0)+1;const txt=(r.aiFeedback||'').toLowerCase();['requirement identification','weak analysis','missing evidence','missing example','diagram','link back','conceptual errors','evaluation','peel'].forEach(k=>{if(txt.includes(k)) weaknessCounts[k]=(weaknessCounts[k]||0)+1})});document.getElementById('analyticsOutput').textContent=`Records by stage:\n${Object.entries(stageCounts).map(([k,v])=>`- ${k}: ${v}`).join('\n')||'No records'}\n\nRecords by class:\n${Object.entries(classCounts).map(([k,v])=>`- ${k}: ${v}`).join('\n')||'No records'}\n\nCommon weakness signals:\n${Object.entries(weaknessCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`- ${k}: ${v}`).join('\n')||'Not enough data yet'}`;document.getElementById('recordsBody').innerHTML=records.map(r=>`<tr><td>${(r.createdAtLocal||'').slice(0,19).replace('T',' ')}</td><td>${escapeHtml(r.studentName||'')}</td><td>${escapeHtml(r.studentClass||'')}</td><td>${escapeHtml(r.stage||'')}</td><td>${escapeHtml((r.question||'').slice(0,120))}</td><td>${escapeHtml((r.aiFeedback||'').slice(0,220))}</td></tr>`).join('')}
+async function aiAnalyseClassData(){const out=document.getElementById('teacherAiAnalysis');if(!cachedRecords.length){out.textContent='No records loaded yet. Click Refresh Data first.';return}out.textContent='AI is analysing class data...';const sample=cachedRecords.slice(0,80).map(r=>`Class:${r.studentClass}\nStage:${r.stage}\nFeedback:${(r.aiFeedback||'').slice(0,800)}`).join('\n---\n');const prompt=`You are helping an Economics teacher analyse student essay-writing data. Summarise common weaknesses, strengths, class-level patterns, and recommend teaching actions.\n\nData:\n${sample}`;try{out.textContent=await callOpenRouter(prompt)}catch(e){out.textContent='Error: '+e.message}}
+function exportCSV(){const rows=[['Date','Name','Class','Email','Stage','EssayType','Question','StudentWork','AIFeedback']];cachedRecords.forEach(r=>rows.push([r.createdAtLocal||'',r.studentName||'',r.studentClass||'',r.studentEmail||'',r.stage||'',r.essayType||'',r.question||'',r.studentWork||'',r.aiFeedback||'']));const csv=rows.map(row=>row.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='econs_essay_coach_records.csv';a.click();URL.revokeObjectURL(a.href)}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function clearAll(){document.querySelectorAll('textarea,input').forEach(x=>{if(x.id!=='teacherPasscode')x.value=''});document.querySelectorAll('.output').forEach(x=>x.textContent='')}
+Object.assign(window,{showTab,downloadFeedback,emailFeedback,insertOutlineTemplate,insertPEEL,insertEvalTemplate,loadTeacherFile,saveTeacherReferenceOnly,checkOutline,checkReq1,checkReq2,generateFullAnalysis,checkEvaluation,unlockTeacher,refreshTeacherData,aiAnalyseClassData,exportCSV,clearAll});
 </script>
 </body>
 </html>
