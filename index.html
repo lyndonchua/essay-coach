@@ -94,20 +94,26 @@ import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orde
 let db=null, firebaseReady=false, cachedRecords=[];
 const COLLECTION='econsEssayCoachSubmissions';
 
-async function initFirebase(){
+function initFirebase(){
   const status=document.getElementById('firebaseStatus');
   try{
-    const res=await fetch('/api/firebase-config');
-    const config=await res.json();
-    if(!res.ok) throw new Error(config.error || 'Firebase config failed.');
-    const app=initializeApp(config);
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0PRpIVUeWTDsmLNPCtMsIQPteUssnWFs",
+      authDomain: "essay-coach-f2f8a.firebaseapp.com",
+      projectId: "essay-coach-f2f8a",
+      storageBucket: "essay-coach-f2f8a.firebasestorage.app",
+      messagingSenderId: "438405401756",
+      appId: "1:438405401756:web:7cb13770f06cb1a2e0f159"
+    };
+
+    const app=initializeApp(firebaseConfig);
     db=getFirestore(app);
     firebaseReady=true;
     status.textContent='Firebase: connected. Student feedback will be recorded for teacher analysis.';
     status.className='card callout ok';
   }catch(e){
     firebaseReady=false;
-    status.textContent='Firebase not connected yet: '+e.message+' Add Firebase environment variables in Vercel.';
+    status.textContent='Firebase not connected: '+e.message;
     status.className='card callout warn';
   }
 }
