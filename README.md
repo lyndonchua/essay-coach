@@ -22,10 +22,6 @@ Firebase config is already pasted into `index.html` for project `essay-coach-f2f
 
 ## New build changes
 
-- Teacher sets the active essay question and hidden model answer in Teacher Dashboard.
-- Students no longer see the answer entry area.
-- Students only see the active question set by the teacher.
-- Active question/model answer is saved to Firebase and used by AI feedback.
 - Removed gamification references such as “Final Boss” and “Essay Power-Ups”.
 - Students can upload PDF/photo/text outline in Step 1.
 - Students can upload PDF/photo/text essay drafts in Requirement 1 and Requirement 2.
