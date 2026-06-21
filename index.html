@@ -12,11 +12,10 @@
 <header>
   <div class="logo-burst">SAJC ECONOMICS</div>
   <h1>Economics Essay Writing Coach</h1>
-  <p>10m & 15m essays • Outline first • PEEL paragraphs • Feedback saved for learning</p>
 </header>
 
 <div class="container">
-<div id="firebaseStatus" class="card callout warn">Firebase: checking connection...</div>
+<div id="firebaseStatus" class="hidden"></div>
 
 <div class="hero-card">
   <div class="card mission">
@@ -26,7 +25,7 @@
       <div class="quest-step"><div class="step-num">2</div><b>Check Outline</b><span>AI checks your plan against the teacher answer if provided.</span></div>
       <div class="quest-step"><div class="step-num">3</div><b>Write R1</b><span>Use feedback to write Requirement 1 using PEEL.</span></div>
       <div class="quest-step"><div class="step-num">4</div><b>Write R2</b><span>Use feedback to write Requirement 2 using PEEL.</span></div>
-      <div class="quest-step"><div class="step-num">5</div><b>Full Analysis</b><span>Generate full analysis, then add evaluation for 15m.</span></div>
+      <div class="quest-step"><div class="step-num">5</div><b>Full Analysis</b><span>Review the completed response after evaluation for part b.</span></div>
     </div>
   </div>
   <div class="card power-card">
@@ -37,11 +36,11 @@
 </div>
 
 <div class="tabs">
-<button class="tab active" onclick="showTab('setup',this)">Step 1: Question + Outline</button>
+<button class="tab active" onclick="showTab('setup',this)">Step 1: Outline</button>
 <button class="tab" onclick="showTab('r1',this)">Step 2: Requirement 1</button>
 <button class="tab" onclick="showTab('r2',this)">Step 3: Requirement 2</button>
-<button class="tab" onclick="showTab('full',this)">Step 4: Full Analysis</button>
-<button class="tab" onclick="showTab('eval',this)">Step 5: Evaluation</button>
+<button class="tab" onclick="showTab('eval',this)">Step 4: Evaluation (only for part b)</button>
+<button class="tab" onclick="showTab('full',this)">Step 5: Full Analysis</button>
 <button class="tab" onclick="showTab('teacher',this)">Teacher Dashboard</button>
 </div>
 
@@ -76,9 +75,9 @@
 
 <div id="r2" class="section"><div class="grid"><div class="card"><h2>Step 3A: Requirement 2 Paragraph</h2><p class="small">Use the outline feedback and Requirement 1 feedback before writing.</p><label>Requirement 2 Paragraph</label><textarea id="req2Paragraph" placeholder="Write Requirement 2 paragraph using PEEL, or upload your essay PDF/photo below..."></textarea><div class="upload-row"><label>Upload Essay PDF / Photo for Requirement 2</label><input id="req2File" type="file" accept=".pdf,image/*,.txt,text/plain" onchange="loadStudentFile(event,'req2')"><div id="req2FileNote" class="file-note">No Requirement 2 file uploaded. If your full essay has both R1 and R2, upload the same file here and in Requirement 1.</div></div><button class="gray" onclick="insertPEEL('req2Paragraph')">Insert PEEL Template</button><button onclick="checkReq2()">AI Check Requirement 2</button></div><div class="card"><h2>Step 3B: AI Feedback for Requirement 2</h2><div id="req2Feedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
 
-<div id="full" class="section"><div class="card"><h2>Step 4: AI Full Analysis</h2><p class="small">This combines the question, teacher reference answer, student outline, Requirement 1, Requirement 2, and all feedback.</p><button class="purple" onclick="generateFullAnalysis()">Generate Full Analysis</button><div id="fullAnalysis" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div>
+<div id="eval" class="section"><div class="grid"><div class="card"><h2>Step 4A: Evaluation (only for part b)</h2><p class="small">Only needed for 15m part (b) questions.</p><label>Evaluation Framework</label><select id="evalFramework"><option value="SSS">SSS: Stand, Support, Suggest</option><option value="FEAST">FEAST: Feasibility, Effectiveness, Appropriateness, Side Effects, Time Period</option></select><label>Student Evaluation</label><textarea id="studentEvaluation" placeholder="Write your evaluation here..."></textarea><button class="gray" onclick="insertEvalTemplate()">Insert Evaluation Template</button><button onclick="checkEvaluation()">AI Check Evaluation</button></div><div class="card"><h2>Step 4B: AI Evaluation Feedback</h2><div id="evaluationFeedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
 
-<div id="eval" class="section"><div class="grid"><div class="card"><h2>Step 5A: Evaluation for 15m Part (b)</h2><p class="small">Only needed for 15m part (b) questions.</p><label>Evaluation Framework</label><select id="evalFramework"><option value="SSS">SSS: Stand, Support, Suggest</option><option value="FEAST">FEAST: Feasibility, Effectiveness, Appropriateness, Side Effects, Time Period</option></select><label>Student Evaluation</label><textarea id="studentEvaluation" placeholder="Write your evaluation here..."></textarea><button class="gray" onclick="insertEvalTemplate()">Insert Evaluation Template</button><button onclick="checkEvaluation()">AI Check Evaluation</button></div><div class="card"><h2>Step 5B: AI Evaluation Feedback</h2><div id="evaluationFeedback" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div></div>
+<div id="full" class="section"><div class="card"><h2>Step 5: AI Full Analysis</h2><p class="small">This combines the question, teacher reference answer, student outline, Requirement 1, Requirement 2, evaluation, and all feedback.</p><button class="purple" onclick="generateFullAnalysis()">Generate Full Analysis</button><div id="fullAnalysis" class="output"></div><button class="green" onclick="downloadFeedback()">Download Feedback</button><button class="purple" onclick="emailFeedback()">Email Feedback</button></div></div>
 
 <div id="teacher" class="section">
 <div id="passcodeCard" class="card"><h2>Teacher Dashboard</h2><p class="small">Enter teacher passcode to set the active question/model answer and view class data.</p><label>Passcode</label><input id="teacherPasscode" type="password" placeholder="Teacher passcode"><button onclick="unlockTeacher()">Unlock</button><div id="passcodeMessage" class="small"></div></div>
@@ -88,6 +87,8 @@
 <div class="callout">Only the question appears on the student screen. The model answer is hidden and used only by AI when giving feedback.</div>
 <label>Question Type</label><select id="teacherEssayType"><option value="10m">10m Part (a) Explain Question</option><option value="15m">15m Part (b) Discuss Question</option></select>
 <label>Essay Question Students Will See</label><textarea id="teacherQuestion" placeholder="Enter the question students should answer..."></textarea>
+<button class="purple" onclick="suggestModelAnswer()">AI Suggest Model Answer</button>
+<div id="modelSuggestStatus" class="small"></div>
 <label>Upload .txt Model Answer</label><input id="teacherFile" type="file" accept=".txt,text/plain" onchange="loadTeacherFile(event)">
 <label>Hidden Model Answer / Suggested Answer</label><textarea id="teacherAnswerInput" placeholder="Paste the full suggested answer here. Students will not see this."></textarea>
 <button class="orange" onclick="saveActiveAssignment()">Save Active Question</button>
@@ -131,8 +132,8 @@ async function initFirebase(){
     const app=initializeApp(firebaseConfig);
     db=getFirestore(app);
     firebaseReady=true;
-    status.textContent='Firebase: connected. Loading active question...';
-    status.className='card callout ok';
+    status.textContent='';
+    status.className='hidden';
   }catch(e){
     firebaseReady=false;
     status.textContent='Firebase not connected: '+e.message;
@@ -207,8 +208,8 @@ async function loadActiveAssignment(){
   }catch(e){console.warn('Active assignment load failed',e)}
   applyActiveAssignment(data);
   if(status){
-    if(data && data.question){status.textContent='Firebase: connected. Active question loaded.';status.className='card callout ok';}
-    else {status.textContent='Firebase: connected. No active question set yet.';status.className='card callout warn';}
+    if(data && data.question){status.textContent='';status.className='hidden';}
+    else {status.textContent='';status.className='hidden';}
   }
 }
 function applyActiveAssignment(data){
@@ -227,6 +228,42 @@ function loadActiveAssignmentToTeacherForm(){
   document.getElementById('teacherAnswerInput').value=document.getElementById('teacherAnswer').value || '';
 }
 function loadTeacherFile(event){const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{document.getElementById('teacherAnswerInput').value=reader.result || ''};reader.readAsText(file)}
+async function suggestModelAnswer(){
+  const q=document.getElementById('teacherQuestion').value.trim();
+  const type=document.getElementById('teacherEssayType').value;
+  const out=document.getElementById('modelSuggestStatus');
+  const answerBox=document.getElementById('teacherAnswerInput');
+  if(!q){alert('Enter the essay question first.');return;}
+  out.textContent='AI is suggesting a model answer...';
+  const prompt=`Question type: ${type}
+Essay question:
+${q}
+
+Task: Draft a teacher-editable suggested answer for this Singapore A-Level Economics question.
+
+Requirements:
+- Keep it structured for teacher editing.
+- For 10m: provide 2 clear requirements and no evaluation.
+- For 15m part b: provide 2 clear requirements plus evaluation.
+- Use PEEL for body paragraphs.
+- Include economic concepts, analysis chains, diagrams if useful, evidence/examples, and links back to the question.
+- Use clear teacher-friendly headings.
+
+Output format:
+Question decoding:
+Requirement 1 suggested answer:
+Requirement 2 suggested answer:
+Evaluation, if 15m:
+Common student mistakes:`;
+  try{
+    const reply=await callOpenRouter(prompt);
+    answerBox.value=reply;
+    out.textContent='Suggested model answer inserted. You can edit it before saving.';
+  }catch(e){
+    out.textContent='Error: '+e.message;
+  }
+}
+
 async function saveActiveAssignment(){
   const payload={
     essayType:document.getElementById('teacherEssayType').value,
@@ -248,7 +285,35 @@ function ensureQuestionReady(){if(!document.getElementById('question').value.tri
 async function checkOutline(){if(!ensureQuestionReady())return;const d=baseData();const out=document.getElementById('outlineFeedback');out.textContent='AI is checking the outline...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}${uploadedBlock('Outline',d.outlineUpload)}\n\nTask: Assess the student's essay outline against the question and teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. Requirement identification: Is Requirement 1 correct? Is Requirement 2 correct? Is evaluation needed?\n3. Reference answer match: What important ideas from the teacher answer are included or missing?\n4. What is done well:\n5. What is missing:\n6. Conceptual errors:\n7. Weak analysis chains:\n8. Missing diagram reference:\n9. Missing evidence / example:\n10. Link-back problem:\n11. Improved outline: Give an improved outline but do NOT write full paragraphs.\n12. Data tags: list 3 weakness tags separated by commas.\n\nUse simple language suitable for a 17-year-old student.`;try{const reply=await callOpenRouter(prompt,d.outlineAttachments);out.textContent=reply;await saveRecord('outline_feedback',d.outline,reply)}catch(e){out.textContent='Error: '+e.message}}
 async function checkReq1(){if(!ensureQuestionReady())return;const d=baseData();const out=document.getElementById('req1Feedback');out.textContent='AI is checking Requirement 1...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nAI outline feedback:\n${d.outlineFeedback}\nStudent Requirement 1 paragraph:\n${d.req1}${uploadedBlock('Requirement 1 essay upload',d.req1Upload)}\n\nTask: Check Requirement 1 paragraph using PEEL and compare with teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. PEEL check: Point / Explain / Evidence or Example / Link\n3. Reference answer match: important ideas included or missing\n4. Economics accuracy:\n5. Analysis chain: logical? missing steps?\n6. Application to question:\n7. Diagram reference, if needed:\n8. Link back to question:\n9. How to improve:\n10. Improved Requirement 1 paragraph: Rewrite only Requirement 1 paragraph.\n11. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt,d.req1Attachments);out.textContent=reply;await saveRecord('requirement_1_feedback',d.req1,reply)}catch(e){out.textContent='Error: '+e.message}}
 async function checkReq2(){if(!ensureQuestionReady())return;const d=baseData();const out=document.getElementById('req2Feedback');out.textContent='AI is checking Requirement 2...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nAI outline feedback:\n${d.outlineFeedback}\nRequirement 1 paragraph:\n${d.req1}\nAI feedback for Requirement 1:\n${d.req1Feedback}\nStudent Requirement 2 paragraph:\n${d.req2}${uploadedBlock('Requirement 2 essay upload',d.req2Upload)}\n\nTask: Check Requirement 2 paragraph using PEEL and compare with teacher reference answer if available.\n\nGive feedback in this format:\n1. Overall judgement: Strong / Developing / Weak\n2. PEEL check: Point / Explain / Evidence or Example / Link\n3. Reference answer match: important ideas included or missing\n4. Economics accuracy:\n5. Analysis chain: logical? missing steps?\n6. Application to question:\n7. Diagram reference, if needed:\n8. Link back to question:\n9. How to improve:\n10. Improved Requirement 2 paragraph: Rewrite only Requirement 2 paragraph.\n11. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt,d.req2Attachments);out.textContent=reply;await saveRecord('requirement_2_feedback',d.req2,reply)}catch(e){out.textContent='Error: '+e.message}}
-async function generateFullAnalysis(){if(!ensureQuestionReady())return;const d=baseData();const out=document.getElementById('fullAnalysis');out.textContent='AI is generating full analysis...';const prompt=`${commonPromptBlock(d)}\nStudent outline:\n${d.outline}\nOutline feedback:\n${d.outlineFeedback}\nRequirement 1 paragraph:\n${d.req1}${uploadedBlock('Requirement 1 essay upload',d.req1Upload)}\nRequirement 1 feedback:\n${d.req1Feedback}\nRequirement 2 paragraph:\n${d.req2}${uploadedBlock('Requirement 2 essay upload',d.req2Upload)}\nRequirement 2 feedback:\n${d.req2Feedback}\n\nTask: Generate the full analysis for this essay question. Use the student's work, teacher reference answer and feedback as the base. Write Requirement 1 analysis and Requirement 2 analysis using PEEL. Include economic concepts, analysis chains, diagram references, evidence/example and link back. If this is 10m, do not include evaluation. If 15m, stop before evaluation and remind student to complete evaluation separately.\n\nOutput format:\nRequirement 1 full analysis:\nRequirement 2 full analysis:\nWhat the student should remember:`;try{const reply=await callOpenRouter(prompt,[...d.req1Attachments,...d.req2Attachments]);out.textContent=reply;await saveRecord('full_analysis',`${d.req1}\n\n${d.req2}`,reply)}catch(e){out.textContent='Error: '+e.message}}
+async function generateFullAnalysis(){if(!ensureQuestionReady())return;const d=baseData();const out=document.getElementById('fullAnalysis');out.textContent='AI is generating full analysis...';const prompt=`${commonPromptBlock(d)}
+Student outline:
+${d.outline}
+Outline feedback:
+${d.outlineFeedback}
+Requirement 1 paragraph:
+${d.req1}${uploadedBlock('Requirement 1 essay upload',d.req1Upload)}
+Requirement 1 feedback:
+${d.req1Feedback}
+Requirement 2 paragraph:
+${d.req2}${uploadedBlock('Requirement 2 essay upload',d.req2Upload)}
+Requirement 2 feedback:
+${d.req2Feedback}
+Student evaluation, if any:
+${d.evaluation}
+Evaluation feedback, if any:
+${d.evaluationFeedback}
+
+Task: Generate the full analysis for this essay question. Use the student's work, teacher reference answer and feedback as the base. Write Requirement 1 analysis and Requirement 2 analysis using PEEL. Include economic concepts, analysis chains, diagram references, evidence/example and link back. If this is 10m, do not include evaluation. If this is 15m and evaluation has been written, include a short improved evaluation after the two requirements. If evaluation is missing, remind student to complete the Evaluation section.
+
+Output format:
+Requirement 1 full analysis:
+Requirement 2 full analysis:
+Evaluation, only if 15m:
+What the student should remember:`;try{const reply=await callOpenRouter(prompt,[...d.req1Attachments,...d.req2Attachments]);out.textContent=reply;await saveRecord('full_analysis',`${d.req1}
+
+${d.req2}
+
+${d.evaluation}`,reply)}catch(e){out.textContent='Error: '+e.message}}
 async function checkEvaluation(){if(!ensureQuestionReady())return;const d=baseData();const framework=document.getElementById('evalFramework').value;const out=document.getElementById('evaluationFeedback');out.textContent='AI is checking evaluation...';const prompt=`${commonPromptBlock(d)}\nFull analysis:\n${d.fullAnalysis}\nEvaluation framework: ${framework}\nStudent evaluation:\n${d.evaluation}\n\nTask: Check the student's evaluation. If 10m, remind student evaluation is not required. If 15m, check stand, support, condition/weighing and final judgement. Compare against teacher reference answer if available.\n\nGive:\n1. Overall judgement: Strong / Developing / Weak\n2. Stand:\n3. Support:\n4. Suggest / Condition:\n5. Final judgement:\n6. Reference answer match:\n7. How to improve:\n8. Improved evaluation using ${framework}:\n9. Data tags: list 3 weakness tags separated by commas.`;try{const reply=await callOpenRouter(prompt);out.textContent=reply;await saveRecord('evaluation_feedback',d.evaluation,reply)}catch(e){out.textContent='Error: '+e.message}}
 function unlockTeacher(){const pass=document.getElementById('teacherPasscode').value;if(pass==='0804'){document.getElementById('passcodeCard').classList.add('hidden');document.getElementById('teacherDashboard').classList.remove('hidden');loadActiveAssignmentToTeacherForm();refreshTeacherData()}else{document.getElementById('passcodeMessage').textContent='Wrong passcode.'}}
 async function refreshTeacherData(){if(!firebaseReady||!db){document.getElementById('analyticsOutput').textContent='Firebase is not connected. Add Firebase environment variables in Vercel and redeploy.';return}const q=query(collection(db,COLLECTION),orderBy('createdAtLocal','desc'),limit(300));const snap=await getDocs(q);cachedRecords=snap.docs.map(doc=>({id:doc.id,...doc.data()}));renderTeacherData(cachedRecords)}
@@ -268,7 +333,7 @@ function clearAll(){
   document.getElementById('req2FileNote').textContent='No Requirement 2 file uploaded. If your full essay has both R1 and R2, upload the same file here and in Requirement 1.';
   loadActiveAssignment();
 }
-Object.assign(window,{showTab,downloadFeedback,emailFeedback,loadStudentFile,insertOutlineTemplate,insertPEEL,insertEvalTemplate,loadTeacherFile,saveActiveAssignment,loadActiveAssignment,loadActiveAssignmentToTeacherForm,checkOutline,checkReq1,checkReq2,generateFullAnalysis,checkEvaluation,unlockTeacher,refreshTeacherData,aiAnalyseClassData,exportCSV,clearAll});
+Object.assign(window,{showTab,downloadFeedback,emailFeedback,loadStudentFile,insertOutlineTemplate,insertPEEL,insertEvalTemplate,loadTeacherFile,suggestModelAnswer,saveActiveAssignment,loadActiveAssignment,loadActiveAssignmentToTeacherForm,checkOutline,checkReq1,checkReq2,generateFullAnalysis,checkEvaluation,unlockTeacher,refreshTeacherData,aiAnalyseClassData,exportCSV,clearAll});
 </script>
 </body>
 </html>
