@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         'X-Title': 'Economics Essay Writing Coach'
       },
       body: JSON.stringify({
-        model: process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini',
+        model: process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4',
         messages: [
           {
             role: 'system',
